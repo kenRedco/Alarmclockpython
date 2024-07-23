@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import datetime
 import time
-import winsound
+from playsound import playsound
 from tkinter.messagebox import showinfo
 from threading import *
 
@@ -36,6 +36,7 @@ lbl_mins.grid(row=2, column=2,padx=5,pady=5)
 lbl_sec= Label(main_window, text ="Seconds",bg="#6699ff",fg="#595959",font=("Courier",14))
 lbl_sec.grid(row=2, column=3,padx=5,pady=5)
 
+
 # creating a text field for hours and #attaching it to the main window
 txt_hours=StringVar()
 tf_hours=ttk.Entry(main_window,textvariable=txt_hours)
@@ -60,9 +61,11 @@ def set_alarm():
         # print current time in a text field
         txt_ct.set(current_time)
         # Check if current system time is equal to the alarm time
+        music_file_path = '/home/john/Music/Not_Like_Us(128k).m4a'
         if current_time==alarm_time:
         # playing sound
-            winsound.PlaySound('E:/Datasets/siren.wav',winsound.SND_FILENAME|winsound.SND_ASYNC)
+            playsound(music_file_path)
+            showinfo("Alarm", "Time to wake up!")
 
 def start_alarm_thread():
     t1=Thread(target=set_alarm)
